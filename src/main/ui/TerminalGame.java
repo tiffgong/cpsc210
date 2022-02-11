@@ -40,7 +40,6 @@ public class TerminalGame {
                 // first row is reserved for us
                 terminalSize.getRows() - 2
         );
-
         beginTicks();
     }
 

@@ -6,6 +6,5 @@ public class Main {
         TerminalGame gameHandler = new TerminalGame();
 
         gameHandler.start();
-
     }
 }

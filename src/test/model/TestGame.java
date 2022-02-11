@@ -3,7 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,6 +29,7 @@ public class TestGame {
 
     @Test
     public void testTick() {
+        final int NUM_UPDATES = 10;
         Player player = game.getPlayer();
         assertEquals((new Position(1,1)),player.getPlayerPos());
         game.tick();
@@ -37,6 +37,13 @@ public class TestGame {
         game.shoot();
         game.tick();
         assertEquals(1,game.getNumBullets());
+
+        for(int count = 1; count < NUM_UPDATES; count++) {
+            game.tick();
+        }
+        assertEquals(10,game.getTarget().size());
+        game.tick();
+        assertEquals(10,game.getTarget().size());
 
         player.setDirection(Direction.LEFT);
         player.move(1);
@@ -54,6 +61,7 @@ public class TestGame {
         assertEquals(1,game.getTarget().size());
         game.spawnNewTarget();
         assertEquals(2,game.getTarget().size());
+        game.tick();
 
     }
 
@@ -65,15 +73,6 @@ public class TestGame {
         assertEquals(2, game.getReloads().size());
     }
 
- ///// ALSO DIDNT DO THIS ONE
-    @Test
-    public void testMoveReload() {
-
-        game.spawnReload();
-        game.spawnReload();
-        List<Reload> reloads = game.getReloads();
-
-    }
 
     @Test
     public void testShoot() {
@@ -92,12 +91,17 @@ public class TestGame {
     public void TestIsOutOfBounds() {
         Position pos = new Position(1000, 1000);
         assertTrue(game.isOutOfBounds(pos));
+        pos = new Position(0, 1000);
+        assertTrue(game.isOutOfBounds(pos));
         pos = new Position(10, 10);
         assertFalse(game.isOutOfBounds(pos));
         pos = new Position(100, 100);
         assertFalse(game.isOutOfBounds(pos));
         pos = new Position(0, 0);
         assertFalse(game.isOutOfBounds(pos));
+        pos = new Position(0, -100);
+        assertTrue(game.isOutOfBounds(pos));
+
     }
 
     @Test
