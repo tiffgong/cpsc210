@@ -49,7 +49,7 @@ public class Game {
             spawnNewTarget();
         }
 
-        if (reloads.isEmpty()) {
+        if (reloads.size() < 2) {
             spawnReload();
         }
     }
@@ -233,34 +233,50 @@ public class Game {
         );
     }
 
+    // modifies: this
+    // effects: returns player
     public Player getPlayer() {
         return player;
     }
 
+    // modifies: this
+    // effects: returns set of Targets
     public Set<Position> getTarget() {
         return target;
     }
 
+    // modifies: this
+    // effects: returns list of Bullets
     public List<Bullet> getBullets() {
         return bullets;
     }
 
+    // modifies: this
+    // effects: returns list of Reloads
     public List<Reload> getReloads() {
         return reloads;
     }
 
+    // modifies: this
+    // effects: returns number of reloads
     public int getNumPower() {
         return numReloads;
     }
 
+    // modifies: this
+    // effects: returns score number
     public int getScore() {
         return score;
     }
 
+    // modifies: this
+    // effects: returns current number of bullets
     public int getNumBullets() {
         return currBullets;
     }
 
+    // modifies: this
+    // effects: returns whether game is ended
     public boolean isEnded() {
         return ended;
     }

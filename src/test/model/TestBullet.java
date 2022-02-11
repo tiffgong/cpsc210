@@ -25,7 +25,6 @@ public class TestBullet {
 
     @Test
     public void testGetBulletY() {
-
         assertEquals(yInt, bull.getBulletY());
     }
 

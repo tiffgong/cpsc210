@@ -87,11 +87,11 @@ public class TerminalGame {
             return;
         }
 
-        if (stroke.getKeyType() == KeyType.Backspace) {
+        if (stroke.getKeyType() == KeyType.Enter) {
             game.shoot();
         }
 
-        if (stroke.getKeyType() == KeyType.Enter) {
+        if (stroke.getKeyType() == KeyType.Backspace) {
             game.useReload();
         }
 
@@ -198,13 +198,13 @@ public class TerminalGame {
     private void drawSnake() {
         Player snake = game.getPlayer();
 
-        drawPosition(snake.getPlayerPos(), TextColor.ANSI.WHITE, '\u2588', true);
+        drawPosition(snake.getPlayerPos(), TextColor.ANSI.WHITE, '█', true);
 
     }
 
     private void drawTarget() {
         for (Position target : game.getTarget()) {
-            drawPosition(target, TextColor.ANSI.RED, '\u2B24', false);
+            drawPosition(target, TextColor.ANSI.RED, '⬤', false);
         }
     }
 
@@ -237,14 +237,14 @@ public class TerminalGame {
     private void drawBullet(Bullet bull) {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.WHITE);
-        text.putString(bull.getBulletX() * 2, bull.getBulletY() + 1, String.valueOf('\u2605'));
+        text.putString(bull.getBulletX() * 2, bull.getBulletY() + 1, String.valueOf('★'));
 
     }
 
     private void drawPower(Reload bull) {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.YELLOW);
-        text.putString(bull.getIntX() * 2, bull.getIntY() + 1, String.valueOf('\u2605'));
+        text.putString(bull.getIntX() * 2, bull.getIntY() + 1, String.valueOf('★'));
 
     }
 }
