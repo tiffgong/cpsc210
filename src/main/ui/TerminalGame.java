@@ -21,10 +21,10 @@ public class TerminalGame {
     private Screen screen;
     private WindowBasedTextGUI endGui;
 
-    /**
-     * Begins the game and method does not leave execution
-     * until game is complete.
-     */
+
+    // modifies: this
+    // effects: Begins the game and method does not leave execution
+    //          until game is complete.
     public void start() throws IOException, InterruptedException {
         screen = new DefaultTerminalFactory().createScreen();
         screen.startScreen();
@@ -44,10 +44,10 @@ public class TerminalGame {
         beginTicks();
     }
 
-    /**
-     * Begins the game cycle. Ticks once every Game.TICKS_PER_SECOND until
-     * game has ended and the endGui has been exited.
-     */
+
+    // modifies: this
+    // effects: Begins the game cycle. Ticks once every Game.TICKS_PER_SECOND until
+    //          game has ended and the endGui has been exited.
     private void beginTicks() throws IOException, InterruptedException {
         while (!game.isEnded() || endGui.getActiveWindow() != null) {
             tick();
@@ -57,10 +57,9 @@ public class TerminalGame {
         System.exit(0);
     }
 
-    /**
-     * Handles one cycle in the game by taking user input,
-     * ticking the game internally, and rendering the effects
-     */
+    // modifies: this
+    // effects: Handles one cycle in the game by taking user input,
+    //          ticking the game internally, and rendering the effects
     private void tick() throws IOException {
         handleUserInput();
 
@@ -75,10 +74,10 @@ public class TerminalGame {
 
     }
 
-    /**
-     * Sets the snake's direction corresponding to the
-     * user's keystroke
-     */
+
+    // modifies: this
+    // effects: Sets the snake's direction, or shoots or reloads corresponding to the
+    //          user's keystroke
     private void handleUserInput() throws IOException {
         KeyStroke stroke = screen.pollInput();
 
@@ -99,7 +98,6 @@ public class TerminalGame {
             return;
         }
 
-
         Direction dir = directionFrom(stroke.getKeyType());
 
         if (dir == null) {
@@ -111,10 +109,10 @@ public class TerminalGame {
         game.getPlayer().move(1);
     }
 
-    /**
-     * Returns the natural direction corresponding to the KeyType.
-     * Null if none found.
-     */
+
+    // modifies: this
+    // effects: Returns the natural direction corresponding to the KeyType.
+    //          Null if none found.
     private Direction directionFrom(KeyType type) {
         switch (type) {
             case ArrowUp:
@@ -130,11 +128,10 @@ public class TerminalGame {
         }
     }
 
-    /**
-     * Renders the current screen.
-     * Draws the end screen if the game has ended, otherwise
-     * draws the score, snake, and food.
-     */
+
+    // effects: Renders the current screen.
+    //          Draws the end screen if the game has ended, otherwise
+    //          draws the score, player, targets, bullets, reloads.
     private void render() {
         if (game.isEnded()) {
             if (endGui == null) {
@@ -145,14 +142,15 @@ public class TerminalGame {
         }
 
         drawScore();
-        drawNumPower();
-        drawSnake();
+        drawNumReloads();
+        drawPlayer();
         drawTarget();
         drawBullets();
-        drawPowers();
+        drawReloads();
         drawNumBullets();
     }
 
+    // effects: Renders the end screen.
     private void drawEndScreen() {
         endGui = new MultiWindowTextGUI(screen);
 
@@ -164,6 +162,7 @@ public class TerminalGame {
                 .showDialog(endGui);
     }
 
+    // effects: Renders the current score
     private void drawScore() {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.GREEN);
@@ -174,6 +173,7 @@ public class TerminalGame {
         text.putString(8, 0, String.valueOf(game.getScore()));
     }
 
+    // effects: Renders the current bullets
     private void drawNumBullets() {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.RED);
@@ -184,7 +184,8 @@ public class TerminalGame {
         text.putString(20, 0, String.valueOf(game.getNumBullets()));
     }
 
-    private void drawNumPower() {
+    // effects: Renders the current reloads
+    private void drawNumReloads() {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.BLUE);
         text.putString(24, 0, "Reloads: ");
@@ -194,36 +195,38 @@ public class TerminalGame {
         text.putString(33, 0, String.valueOf(game.getNumPower()));
     }
 
-
-    private void drawSnake() {
+    // effects: Renders the player
+    private void drawPlayer() {
         Player snake = game.getPlayer();
 
         drawPosition(snake.getPlayerPos(), TextColor.ANSI.WHITE, '█', true);
 
     }
 
+    // effects: Renders the targets
     private void drawTarget() {
         for (Position target : game.getTarget()) {
             drawPosition(target, TextColor.ANSI.RED, '⬤', false);
         }
     }
 
+    // effects: Renders the bullets
     private void drawBullets() {
         for (Bullet next : game.getBullets()) {
             drawBullet(next);
         }
     }
 
-    private void drawPowers() {
+    // effects: Renders the pickup-able reloads
+    private void drawReloads() {
         for (Reload next : game.getReloads()) {
             drawPower(next);
         }
     }
 
-    /**
-     * Draws a character in a given position on the terminal.
-     * If wide, it will draw the character twice to make it appear wide.
-     */
+    // modifies: terminal
+    // effects: Draws a character in a given position on the terminal.
+    //           If wide, it will draw the character twice to make it appear wide.
     private void drawPosition(Position pos, TextColor color, char c, boolean wide) {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(color);
@@ -234,6 +237,7 @@ public class TerminalGame {
         }
     }
 
+    // effects: Renders a bullet
     private void drawBullet(Bullet bull) {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.WHITE);
@@ -241,6 +245,7 @@ public class TerminalGame {
 
     }
 
+    // effects: Renders a reload
     private void drawPower(Reload bull) {
         TextGraphics text = screen.newTextGraphics();
         text.setForegroundColor(TextColor.ANSI.YELLOW);

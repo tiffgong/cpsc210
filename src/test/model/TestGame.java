@@ -34,7 +34,9 @@ public class TestGame {
         assertEquals((new Position(1,1)),player.getPlayerPos());
         game.tick();
 
-
+        game.shoot();
+        game.tick();
+        assertEquals(1,game.getNumBullets());
 
         player.setDirection(Direction.LEFT);
         player.move(1);
@@ -52,6 +54,7 @@ public class TestGame {
         assertEquals(1,game.getTarget().size());
         game.spawnNewTarget();
         assertEquals(2,game.getTarget().size());
+
     }
 
     @Test
@@ -118,20 +121,20 @@ public class TestGame {
     @Test
     public void testUseReload() {
 
-        assertEquals(2,game.getNumBullets());
+        assertEquals(1,game.getNumBullets());
         assertEquals(1,game.getNumPower());
         game.useReload();
-        assertEquals(7,game.getNumBullets());
+        assertEquals(6,game.getNumBullets());
         game.useReload();
         assertEquals(0,game.getNumPower());
         game.useReload();
         assertEquals(0,game.getNumPower());
-        assertEquals(7,game.getNumBullets());
+        assertEquals(6,game.getNumBullets());
 
     }
     @Test
     public void testGetNumPower() {
-        assertEquals(2,game.getNumPower());
+        assertEquals(1,game.getNumPower());
     }
     @Test
     public void testGetScore() {

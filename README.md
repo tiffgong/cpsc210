@@ -16,11 +16,12 @@ in the future.
 ## User stories
 
 As a user, I want to be able to collect "reloads" and use them.
+_(add Reloads to Game)_
 
 As a user, I want to be able to move my player in all 4 directions.
 
 As a user, I want to be able to shoot bullets from my player in all directions.
 
-As a user, I want to be able to die if I run into a target.
+As a user, I want to be able to die if I run into a target or off screen.
 
 As a user, I want to be able to press enter to shoot, back key to reload, arrow keys to move.
