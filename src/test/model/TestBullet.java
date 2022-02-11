@@ -53,6 +53,7 @@ public class TestBullet {
         bull = new Bullet(pos, Direction.DOWN);
         bull.move();
         assertEquals(22, bull.getBulletY());
+
     }
 
 }

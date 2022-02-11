@@ -17,7 +17,7 @@ public class Game {
     List<Bullet> bulletsToRemove = new ArrayList<>();
     List<Reload> powersToRemove = new ArrayList<>();
     private int score = 0;
-    private int numReloads = 3;
+    private int numReloads = 1;
     private boolean ended = false;
     public final int maxX;
     public final int maxY;

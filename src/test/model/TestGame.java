@@ -33,7 +33,17 @@ public class TestGame {
         Player player = game.getPlayer();
         assertEquals((new Position(1,1)),player.getPlayerPos());
         game.tick();
-        /// ELPELPELEPLPE
+
+
+
+        player.setDirection(Direction.LEFT);
+        player.move(1);
+        game.tick();
+        player.move(1);
+        game.tick();
+        assertEquals(-1, player.getPlayerPos().getIntX());
+        assertTrue(game.isEnded());
+
     }
 
     @Test
@@ -51,6 +61,7 @@ public class TestGame {
         game.spawnReload();
         assertEquals(2, game.getReloads().size());
     }
+
  ///// ALSO DIDNT DO THIS ONE
     @Test
     public void testMoveReload() {
@@ -103,4 +114,34 @@ public class TestGame {
         assertFalse(game.isValidPosition(pos));
 
     }
+
+    @Test
+    public void testUseReload() {
+
+        assertEquals(2,game.getNumBullets());
+        assertEquals(1,game.getNumPower());
+        game.useReload();
+        assertEquals(7,game.getNumBullets());
+        game.useReload();
+        assertEquals(0,game.getNumPower());
+        game.useReload();
+        assertEquals(0,game.getNumPower());
+        assertEquals(7,game.getNumBullets());
+
+    }
+    @Test
+    public void testGetNumPower() {
+        assertEquals(2,game.getNumPower());
+    }
+    @Test
+    public void testGetScore() {
+
+        assertEquals(0,game.getScore());
+    }
+    @Test
+    public void testIsEnded() {
+        assertFalse(game.isEnded());
+    }
+
+
 }

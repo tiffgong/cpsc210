@@ -22,5 +22,14 @@ public class TestPosition {
         assertTrue(pos.equals(test));
         test = new Position(1,1);
         assertFalse(pos.equals(test));
+
+        assertFalse(pos.equals(null));
+
+        test = new Position(10,1);
+        assertFalse(pos.equals(test));
+        test = new Position(10,20);
+        assertTrue(pos.equals(test));
+        test = new Position(1,20);
+        assertFalse(pos.equals(test));
     }
 }
