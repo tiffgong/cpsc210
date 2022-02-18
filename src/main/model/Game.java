@@ -4,7 +4,7 @@ package model;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-
+// represents game
 public class Game {
     public static final int TICKS_PER_SECOND = 10;
     private final Player player = new Player();

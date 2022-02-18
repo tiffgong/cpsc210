@@ -1,5 +1,6 @@
 package model;
 
+// represents an item used for "reloads"
 public class Reload {
 
     public static final int DY = 1;
@@ -8,8 +9,8 @@ public class Reload {
     private int intX;
     private int intY;
 
-    // Constructs an invader
-    // effects: invader is positioned at coordinates (x, y)
+    // Constructs an Reload
+    // effects: reload is positioned at coordinates (x, y)
     public Reload(int x, int y) {
         this.intX = x;
         this.intY = y;

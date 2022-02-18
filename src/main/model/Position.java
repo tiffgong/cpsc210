@@ -1,8 +1,7 @@
 package model;
 
-/**
- * Represents a position in the game space.
- */
+
+//Represents a position in the game space.
 public class Position {
     private final int intX;
     private final int intY;

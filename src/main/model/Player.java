@@ -1,5 +1,6 @@
 package model;
 
+// the player use controls
 public class Player {
     private Direction playerDir;
     private Position body;

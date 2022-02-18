@@ -1,5 +1,6 @@
 package model;
 
+// represents a bullet
 public class Bullet {
 
     public static final int DY = -2;

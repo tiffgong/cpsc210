@@ -16,6 +16,7 @@ import model.*;
 
 import java.io.IOException;
 
+// the terminal game
 public class TerminalGame {
     private Game game;
     private Screen screen;
@@ -34,7 +35,7 @@ public class TerminalGame {
         game = new Game(
                 // divide the columns in two
                 // this is so we can make the each part of
-                // the snake wide, since terminal characters are
+                // the player wide, since terminal characters are
                 // taller than they are wide
                 (terminalSize.getColumns() - 1) / 2,
                 // first row is reserved for us
@@ -75,7 +76,7 @@ public class TerminalGame {
 
 
     // modifies: this
-    // effects: Sets the snake's direction, or shoots or reloads corresponding to the
+    // effects: Sets the player's direction, or shoots or reloads corresponding to the
     //          user's keystroke
     private void handleUserInput() throws IOException {
         KeyStroke stroke = screen.pollInput();
@@ -196,9 +197,9 @@ public class TerminalGame {
 
     // effects: Renders the player
     private void drawPlayer() {
-        Player snake = game.getPlayer();
+        Player player = game.getPlayer();
 
-        drawPosition(snake.getPlayerPos(), TextColor.ANSI.WHITE, '█', true);
+        drawPosition(player.getPlayerPos(), TextColor.ANSI.WHITE, '█', true);
 
     }
 
