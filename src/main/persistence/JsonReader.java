@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads game from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -54,16 +54,20 @@ public class JsonReader {
         return game;
     }
 
-    private void addTargets(Game wr, JSONObject jsonObject) {
+    // MODIFIES: game
+    // EFFECTS: parses targets from JSON object and adds it to game
+    private void addTargets(Game game, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("targets");
         for (Object json : jsonArray) {
-            JSONObject nextThingy = (JSONObject) json;
-            addTarget(wr, nextThingy);
+            JSONObject nextTarget = (JSONObject) json;
+            addTarget(game, nextTarget);
         }
     }
 
-    private void addTarget(Game wr, JSONObject jsonObject) {
-        wr.setTarget(jsonObject.getInt("intX"), jsonObject.getInt("intY"));
+    // MODIFIES: game
+    // EFFECTS: parses target from JSON object and adds it to game
+    private void addTarget(Game game, JSONObject jsonObject) {
+        game.setTarget(jsonObject.getInt("intX"), jsonObject.getInt("intY"));
     }
 
 

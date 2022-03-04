@@ -1,51 +1,51 @@
 {
     "max y": 22,
-    "score": 4,
+    "score": 16,
     "max x": 39,
-    "player y": 12,
-    "player x": 19,
+    "player y": 6,
+    "player x": 14,
     "targets": [
         {
-            "intX": 10,
-            "intY": 19
-        },
-        {
-            "intX": 36,
+            "intX": 18,
             "intY": 15
         },
         {
-            "intX": 37,
-            "intY": 20
-        },
-        {
-            "intX": 38,
-            "intY": 14
-        },
-        {
-            "intX": 10,
+            "intX": 21,
             "intY": 15
         },
         {
-            "intX": 10,
-            "intY": 20
-        },
-        {
-            "intX": 16,
-            "intY": 1
-        },
-        {
-            "intX": 13,
-            "intY": 0
-        },
-        {
-            "intX": 9,
+            "intX": 22,
             "intY": 16
         },
         {
-            "intX": 29,
+            "intX": 1,
+            "intY": 21
+        },
+        {
+            "intX": 33,
             "intY": 1
+        },
+        {
+            "intX": 24,
+            "intY": 10
+        },
+        {
+            "intX": 27,
+            "intY": 12
+        },
+        {
+            "intX": 3,
+            "intY": 14
+        },
+        {
+            "intX": 13,
+            "intY": 17
+        },
+        {
+            "intX": 12,
+            "intY": 21
         }
     ],
-    "number reloads": 0,
-    "number bullets": 4
+    "number reloads": 4,
+    "number bullets": 0
 }

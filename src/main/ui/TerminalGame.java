@@ -87,39 +87,34 @@ public class TerminalGame {
     // modifies: this
     // effects: Sets the player's direction, or shoots or reloads corresponding to the
     //          user's keystroke
+    @SuppressWarnings("methodlength")
     private void handleUserInput() throws IOException {
         KeyStroke stroke = screen.pollInput();
         if (stroke == null) {
             return;
         }
-
         if (stroke.getKeyType() == KeyType.Enter) {
             game.shoot();
         }
-
         if (stroke.getKeyType() == KeyType.Backspace) {
             game.useReload();
         }
-
         if (stroke.getKeyType() == KeyType.F1) {
             saveWorkRoom();
         }
-
         if (stroke.getKeyType() == KeyType.F2) {
             loadWorkRoom();
         }
-
         if (stroke.getCharacter() != null) {
             return;
         }
-        Direction dir = directionFrom(stroke.getKeyType());
 
+        Direction dir = directionFrom(stroke.getKeyType());
         if (dir == null) {
             return;
         }
 
         game.getPlayer().setDirection(dir);
-
         game.getPlayer().move(1);
     }
 
