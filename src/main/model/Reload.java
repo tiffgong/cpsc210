@@ -45,4 +45,5 @@ public class Reload {
         this.powerPos = new Position(intX, intY);
     }
 
+
 }

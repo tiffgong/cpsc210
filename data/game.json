@@ -1,0 +1,51 @@
+{
+    "max y": 22,
+    "score": 4,
+    "max x": 39,
+    "player y": 12,
+    "player x": 19,
+    "targets": [
+        {
+            "intX": 10,
+            "intY": 19
+        },
+        {
+            "intX": 36,
+            "intY": 15
+        },
+        {
+            "intX": 37,
+            "intY": 20
+        },
+        {
+            "intX": 38,
+            "intY": 14
+        },
+        {
+            "intX": 10,
+            "intY": 15
+        },
+        {
+            "intX": 10,
+            "intY": 20
+        },
+        {
+            "intX": 16,
+            "intY": 1
+        },
+        {
+            "intX": 13,
+            "intY": 0
+        },
+        {
+            "intX": 9,
+            "intY": 16
+        },
+        {
+            "intX": 29,
+            "intY": 1
+        }
+    ],
+    "number reloads": 0,
+    "number bullets": 4
+}

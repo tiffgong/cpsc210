@@ -1,0 +1,19 @@
+{
+    "max y": 100,
+    "score": 0,
+    "max x": 100,
+    "player y": 1,
+    "player x": 1,
+    "targets": [
+        {
+            "intX": 99,
+            "intY": 87
+        },
+        {
+            "intX": 29,
+            "intY": 26
+        }
+    ],
+    "number reloads": 1,
+    "number bullets": 4
+}

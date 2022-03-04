@@ -1,23 +1,27 @@
 package model;
 
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 // represents game
-public class Game {
+public class Game implements Writable {
     public static final int TICKS_PER_SECOND = 10;
-    private final Player player = new Player();
-    private final Set<Position> target = new HashSet<>();
-    private static int currBullets = 5;
-    private final List<Bullet> bullets;
-    private final List<Reload> reloads;
+    private Player player = new Player();
+    private Set<Position> target = new HashSet<>();
+    private List<Bullet> bullets;
+    private List<Reload> reloads;
     public static final Random RND = new Random();
 
     List<Bullet> bulletsToRemove = new ArrayList<>();
     List<Reload> powersToRemove = new ArrayList<>();
     private int score = 0;
     private int numReloads = 1;
+    private int currBullets = 5;
     private boolean ended = false;
     public final int maxX;
     public final int maxY;
@@ -221,7 +225,6 @@ public class Game {
         }
     }
 
-
     // Generates a random position
     // modifies: this
     // effects: Generates a random position, guaranteed
@@ -280,5 +283,62 @@ public class Game {
     public boolean isEnded() {
         return ended;
     }
+
+    // effects: sets list of Bullets
+    public void setBullets(int bull) {
+        currBullets = bull;
+    }
+
+    // effects: sets number of reloads
+    public void setNumPower(int nump) {
+        numReloads = nump;
+    }
+
+    // effects: sets score number
+    public void setScore(int sc) {
+        score = sc;
+    }
+
+    // effects: get maxX
+    public int getMaxX() {
+        return maxX;
+    }
+
+    // effects: get maxY
+    public int getMaxY() {
+        return maxY;
+    }
+
+    // effects: set targets
+    public void setTarget(int posX, int posY) {
+        target.remove(0);
+        target.add(new Position(posX,posY));
+    }
+
+    // effects: set player X coord
+    public void setPlayerX(int playerX) {
+        this.player.setPositionX(playerX);
+    }
+
+    // effects: set player Y coord
+    public void setPlayerY(int playerY) {
+        this.player.setPositionY(playerY);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("score", score);
+        json.put("number reloads", getNumPower());
+        json.put("number bullets", getNumBullets());
+        json.put("targets", getTarget());
+        json.put("player x", player.getPlayerPos().getIntX());
+        json.put("player y", player.getPlayerPos().getIntY());
+        json.put("max x", getMaxX());
+        json.put("max y", getMaxY());
+
+        return json;
+    }
+
 }
 

@@ -24,6 +24,18 @@ public class Player {
     }
 
     // modifies: this
+    // effects: sets the position x of player
+    public void setPositionX(int positionX) {
+        this.body = new Position(positionX, body.getIntY());
+    }
+
+    // modifies: this
+    // effects: sets the position y of player
+    public void setPositionY(int positionY) {
+        this.body = new Position(body.getIntX(), positionY);
+    }
+
+    // modifies: this
     // effects: returns Position of player
     public Position getPlayerPos() {
         return body;

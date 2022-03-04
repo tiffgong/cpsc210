@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +37,7 @@ public class TestGame {
 
         game.shoot();
         game.tick();
-        assertEquals(1,game.getNumBullets());
+        assertEquals(4,game.getNumBullets());
 
         for(int count = 1; count < NUM_UPDATES; count++) {
             game.tick();
@@ -62,7 +63,6 @@ public class TestGame {
         game.spawnNewTarget();
         assertEquals(2,game.getTarget().size());
         game.tick();
-
     }
 
     @Test
@@ -101,12 +101,10 @@ public class TestGame {
         assertFalse(game.isOutOfBounds(pos));
         pos = new Position(0, -100);
         assertTrue(game.isOutOfBounds(pos));
-
     }
 
     @Test
     public void TestTsValidPosition() {
-
         Position pos = new Position(1000, 1000);
         assertFalse(game.isValidPosition(pos));
 
@@ -119,30 +117,29 @@ public class TestGame {
         game.spawnNewTarget();
         pos = game.getTarget().iterator().next();
         assertFalse(game.isValidPosition(pos));
-
     }
 
     @Test
     public void testUseReload() {
 
-        assertEquals(1,game.getNumBullets());
+        assertEquals(5,game.getNumBullets());
         assertEquals(1,game.getNumPower());
         game.useReload();
-        assertEquals(6,game.getNumBullets());
+        assertEquals(10,game.getNumBullets());
         game.useReload();
         assertEquals(0,game.getNumPower());
         game.useReload();
         assertEquals(0,game.getNumPower());
-        assertEquals(6,game.getNumBullets());
+        assertEquals(10,game.getNumBullets());
 
     }
     @Test
     public void testGetNumPower() {
         assertEquals(1,game.getNumPower());
     }
+
     @Test
     public void testGetScore() {
-
         assertEquals(0,game.getScore());
     }
     @Test
@@ -150,5 +147,55 @@ public class TestGame {
         assertFalse(game.isEnded());
     }
 
+
+    @Test
+    public void testSetBullets() {
+        int num = 11;
+        assertEquals(5, game.getNumBullets());
+        game.setBullets(num);
+        assertEquals(num, game.getNumBullets());
+    }
+
+    @Test
+    public void testSetNumPower() {
+        int num = 10;
+        assertEquals(1, game.getNumPower());
+        game.setNumPower(num);
+        assertEquals(num, game.getNumPower());
+    }
+
+    @Test
+    public void testSetScore(){
+        int num = 10;
+        assertEquals(0, game.getScore());
+        game.setScore(num);
+        assertEquals(num, game.getScore());
+    }
+
+    @Test
+    public void testGetMaxX() {
+        assertEquals(100, game.getMaxX());
+    }
+
+    @Test
+    public void testGetMaxY() {
+        assertEquals(200, game.getMaxY());
+    }
+
+
+    @Test
+    public void testSetPlayerX() {
+        assertEquals(1, game.getPlayer().getPlayerPos().getIntX());
+        game.setPlayerX(10);
+        assertEquals(10, game.getPlayer().getPlayerPos().getIntX());
+    }
+
+    @Test
+    public void testSetPlayerY() {
+        assertEquals(1, game.getPlayer().getPlayerPos().getIntY());
+        game.setPlayerY(10);
+        assertEquals(10, game.getPlayer().getPlayerPos().getIntY());
+
+    }
 
 }

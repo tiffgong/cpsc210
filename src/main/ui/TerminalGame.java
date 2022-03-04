@@ -13,7 +13,10 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // the terminal game
@@ -21,6 +24,9 @@ public class TerminalGame {
     private Game game;
     private Screen screen;
     private WindowBasedTextGUI endGui;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+    private static final String JSON_STORE = "./data/game.json";
 
 
     // modifies: this
@@ -41,7 +47,10 @@ public class TerminalGame {
                 // first row is reserved for us
                 terminalSize.getRows() - 2
         );
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         beginTicks();
+
     }
 
 
@@ -80,8 +89,6 @@ public class TerminalGame {
     //          user's keystroke
     private void handleUserInput() throws IOException {
         KeyStroke stroke = screen.pollInput();
-
-
         if (stroke == null) {
             return;
         }
@@ -94,10 +101,17 @@ public class TerminalGame {
             game.useReload();
         }
 
+        if (stroke.getKeyType() == KeyType.F1) {
+            saveWorkRoom();
+        }
+
+        if (stroke.getKeyType() == KeyType.F2) {
+            loadWorkRoom();
+        }
+
         if (stroke.getCharacter() != null) {
             return;
         }
-
         Direction dir = directionFrom(stroke.getKeyType());
 
         if (dir == null) {
@@ -140,7 +154,6 @@ public class TerminalGame {
 
             return;
         }
-
         drawScore();
         drawNumReloads();
         drawPlayer();
@@ -251,5 +264,29 @@ public class TerminalGame {
         text.setForegroundColor(TextColor.ANSI.YELLOW);
         text.putString(bull.getIntX() * 2, bull.getIntY() + 1, String.valueOf('★'));
 
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveWorkRoom() {
+
+        try {
+            jsonWriter.open();
+            jsonWriter.write(game);
+            jsonWriter.close();
+            System.out.println("Saved from " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadWorkRoom() {
+        try {
+            game = jsonReader.read();
+            System.out.println("Loaded from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }

@@ -40,6 +40,20 @@ public class TestPlayer {
         assertEquals(pos, player.getPlayerPos());
     }
 
+    @Test
+    public void testSetPositionX() {
+        assertEquals(1, player.getPlayerPos().getIntX());
+        player.setPositionX(20);
+        assertEquals(20, player.getPlayerPos().getIntX());
+    }
+
+    @Test
+    public void testSetPositionY() {
+        assertEquals(1, player.getPlayerPos().getIntY());
+        player.setPositionY(10);
+        assertEquals(10, player.getPlayerPos().getIntY());
+    }
+
 
     @Test
     public void testHasCollided() {

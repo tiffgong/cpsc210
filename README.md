@@ -30,8 +30,13 @@ As a user, I want to be able to die if I run into a target or off-screen.
 
 As a user, I want to be able to press enter to shoot, back key to reload, arrow keys to move.
 
+As a user, I want to be able to save my current score, number of bullets/reloads, targets and position to file by pressing F1. 
+
+As a user, I want to be able to load my current score, number of bullets/reloads, targets and position from file by pressing F1.
+
 ## Citation
 
 Code taken from:
 - https://github.students.cs.ubc.ca/CPSC210/SnakeConsole-Lanterna.git
 - https://github.students.cs.ubc.ca/CPSC210/B02-SpaceInvadersBase.git
+- https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
