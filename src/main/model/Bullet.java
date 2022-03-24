@@ -3,11 +3,15 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
+import java.awt.*;
+
 // represents a bullet
 public class Bullet {
 
-    public static final int DY = -2;
-    public static final int DX = 2;
+    public static final int SIZE_X = 5;
+    public static final int SIZE_Y = 9;
+    public static final int DY = -4;
+    public static final int DX = 4;
     private Position bulletPos;
     private static Direction bulletDir;
     private int bulletX;
@@ -63,7 +67,11 @@ public class Bullet {
     // modifies: this
     // effects: returns true if bullet is at a given position, false otherwise
     public boolean hasCollided(Position pos) {
-        return bulletPos.equals(pos);
+        Rectangle invaderBoundingRect = new Rectangle(getPos().getIntX() - SIZE_X / 2,
+                getPos().getIntY() - SIZE_Y / 2, SIZE_X, SIZE_Y);
+        Rectangle missileBoundingRect = new Rectangle(pos.getIntX() - Bullet.SIZE_X / 2,
+                pos.getIntY() - Bullet.SIZE_Y / 2, Bullet.SIZE_X, Bullet.SIZE_Y);
+        return invaderBoundingRect.intersects(missileBoundingRect);
     }
 
 }

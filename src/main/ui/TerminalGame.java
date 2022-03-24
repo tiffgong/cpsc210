@@ -263,7 +263,6 @@ public class TerminalGame {
 
     // EFFECTS: saves the workroom to file
     private void saveWorkRoom() {
-
         try {
             jsonWriter.open();
             jsonWriter.write(game);

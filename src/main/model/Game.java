@@ -25,6 +25,8 @@ public class Game implements Writable {
     private boolean ended = false;
     public final int maxX;
     public final int maxY;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 600;
 
     public Game(int maxX, int maxY) {
         this.maxX = maxX;

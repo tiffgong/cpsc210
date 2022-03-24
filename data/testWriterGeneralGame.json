@@ -6,12 +6,12 @@
     "player x": 1,
     "targets": [
         {
-            "intX": 99,
-            "intY": 87
+            "intX": 19,
+            "intY": 82
         },
         {
-            "intX": 29,
-            "intY": 26
+            "intX": 46,
+            "intY": 80
         }
     ],
     "number reloads": 1,
