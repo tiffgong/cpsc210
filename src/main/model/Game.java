@@ -58,6 +58,11 @@ public class Game implements Writable {
         if (reloads.size() < 2) {
             spawnReload();
         }
+
+        if (isEnded()) {
+            bullets.clear();
+            target.clear();
+        }
     }
 
     // spawns a target

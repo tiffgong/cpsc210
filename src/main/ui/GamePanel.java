@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
 public class GamePanel extends JPanel {
 
     private static final String OVER = "Game Over!";
-    private static final String REPLAY = "R to replay";
+    private static final String SCORE = "Score:";
     private Game game;
 
     // Constructs a game panel
@@ -21,7 +21,7 @@ public class GamePanel extends JPanel {
     //           updates this with the game to be displayed
     public GamePanel(Game g) {
         setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
-        setBackground(Color.GRAY);
+        setBackground(Color.black);
         this.game = g;
     }
 
@@ -29,10 +29,12 @@ public class GamePanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        drawGame(g);
 
         if (game.isEnded()) {
             gameOver(g);
+
+        } else {
+            drawGame(g);
         }
     }
 
@@ -120,11 +122,11 @@ public class GamePanel extends JPanel {
     // effects:  draws "game over" and replay instructions onto g
     private void gameOver(Graphics g) {
         Color saved = g.getColor();
-        g.setColor(new Color(0, 0, 0));
+        g.setColor(Color.WHITE);
         g.setFont(new Font("Arial", 20, 20));
         FontMetrics fm = g.getFontMetrics();
         centreString(OVER, g, fm, Game.HEIGHT / 2);
-        centreString(REPLAY, g, fm, Game.HEIGHT / 2 + 50);
+        centreString(SCORE + game.getScore(), g, fm, Game.HEIGHT / 2 + 50);
         g.setColor(saved);
     }
 

@@ -2,48 +2,48 @@
     "max y": 600,
     "score": 0,
     "max x": 800,
-    "player y": 121,
-    "player x": 56,
+    "player y": 1,
+    "player x": 1,
     "targets": [
         {
-            "intX": 112,
-            "intY": 315
+            "intX": 208,
+            "intY": 186
         },
         {
-            "intX": 718,
-            "intY": 196
+            "intX": 520,
+            "intY": 77
         },
         {
-            "intX": 660,
-            "intY": 115
+            "intX": 513,
+            "intY": 38
         },
         {
-            "intX": 650,
-            "intY": 423
+            "intX": 135,
+            "intY": 474
         },
         {
-            "intX": 768,
-            "intY": 370
+            "intX": 27,
+            "intY": 163
         },
         {
-            "intX": 53,
-            "intY": 32
+            "intX": 487,
+            "intY": 153
         },
         {
-            "intX": 484,
-            "intY": 535
+            "intX": 430,
+            "intY": 110
         },
         {
-            "intX": 751,
-            "intY": 537
+            "intX": 723,
+            "intY": 295
         },
         {
-            "intX": 654,
-            "intY": 285
+            "intX": 474,
+            "intY": 238
         },
         {
-            "intX": 355,
-            "intY": 317
+            "intX": 139,
+            "intY": 139
         }
     ],
     "number reloads": 1,

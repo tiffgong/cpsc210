@@ -40,3 +40,5 @@ Code taken from:
 - https://github.students.cs.ubc.ca/CPSC210/SnakeConsole-Lanterna.git
 - https://github.students.cs.ubc.ca/CPSC210/B02-SpaceInvadersBase.git
 - https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+- http://www2.hawaii.edu/~takebaya/ics111/simple_gui/simple_gui.html
+- https://stackoverflow.com/questions/16134549/how-to-make-a-splash-screen-for-gui
