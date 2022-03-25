@@ -30,7 +30,7 @@ class JsonWriterTest  {
             Game game = new Game(100, 100);
             game.tick();
             Player player = game.getPlayer();
-            assertEquals((new Position(1,1)),player.getPlayerPos());
+            assertEquals((new Position(400,300)),player.getPlayerPos());
             game.tick();
             game.shoot();
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralGame.json");
@@ -44,8 +44,8 @@ class JsonWriterTest  {
             assertEquals(4, game.getNumBullets());
             assertEquals(0, game.getScore());
             assertEquals(1, game.getNumPower());
-            assertEquals(1 ,game.getPlayer().getPlayerPos().getIntX());
-            assertEquals(1 ,game.getPlayer().getPlayerPos().getIntY());
+            assertEquals(400 ,game.getPlayer().getPlayerPos().getIntX());
+            assertEquals(300 ,game.getPlayer().getPlayerPos().getIntY());
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

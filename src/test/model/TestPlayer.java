@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestPlayer {
     private Player player;
-    private static final int xInt = 1;
-    private static final int yInt = 1;
+    private static final int xInt = 400;
+    private static final int yInt = 300;
     private Position pos = new Position(xInt, yInt);
 
     @BeforeEach
@@ -19,7 +19,7 @@ public class TestPlayer {
     @Test
     public void testMove() {
         player.move(1);
-        pos = new Position(2,1);
+        pos = new Position(401,300);
         assertEquals(pos, player.getPlayerPos());
     }
 
@@ -42,14 +42,14 @@ public class TestPlayer {
 
     @Test
     public void testSetPositionX() {
-        assertEquals(1, player.getPlayerPos().getIntX());
+        assertEquals(400, player.getPlayerPos().getIntX());
         player.setPositionX(20);
         assertEquals(20, player.getPlayerPos().getIntX());
     }
 
     @Test
     public void testSetPositionY() {
-        assertEquals(1, player.getPlayerPos().getIntY());
+        assertEquals(300, player.getPlayerPos().getIntY());
         player.setPositionY(10);
         assertEquals(10, player.getPlayerPos().getIntY());
     }

@@ -21,7 +21,7 @@ public class TestGame {
     @Test
     public void testInIt() {
         Player player = game.getPlayer();
-        assertEquals((new Position(1,1)),player.getPlayerPos());
+        assertEquals((new Position(400,300)),player.getPlayerPos());
         List<Bullet> bullets = game.getBullets();
         assertEquals(0, bullets.size());
         List<Reload> reloads = game.getReloads();
@@ -32,7 +32,7 @@ public class TestGame {
     public void testTick() {
         final int NUM_UPDATES = 10;
         Player player = game.getPlayer();
-        assertEquals((new Position(1,1)),player.getPlayerPos());
+        assertEquals((new Position(400,300)),player.getPlayerPos());
         game.tick();
 
         game.shoot();
@@ -42,16 +42,16 @@ public class TestGame {
         for(int count = 1; count < NUM_UPDATES; count++) {
             game.tick();
         }
-        assertEquals(10,game.getTarget().size());
+        assertEquals(0,game.getTarget().size());
         game.tick();
-        assertEquals(10,game.getTarget().size());
+        assertEquals(0,game.getTarget().size());
 
         player.setDirection(Direction.LEFT);
         player.move(1);
         game.tick();
         player.move(1);
         game.tick();
-        assertEquals(-1, player.getPlayerPos().getIntX());
+        assertEquals(398, player.getPlayerPos().getIntX());
         assertTrue(game.isEnded());
 
     }
@@ -111,7 +111,7 @@ public class TestGame {
         pos = new Position(100, 100);
         assertTrue(game.isValidPosition(pos));
 
-        pos = new Position(1, 1); // player at this pos
+        pos = new Position(-2, -10); // player at this pos
         assertFalse(game.isValidPosition(pos));
 
         game.spawnNewTarget();
@@ -185,14 +185,14 @@ public class TestGame {
 
     @Test
     public void testSetPlayerX() {
-        assertEquals(1, game.getPlayer().getPlayerPos().getIntX());
+        assertEquals(400, game.getPlayer().getPlayerPos().getIntX());
         game.setPlayerX(10);
         assertEquals(10, game.getPlayer().getPlayerPos().getIntX());
     }
 
     @Test
     public void testSetPlayerY() {
-        assertEquals(1, game.getPlayer().getPlayerPos().getIntY());
+        assertEquals(300, game.getPlayer().getPlayerPos().getIntY());
         game.setPlayerY(10);
         assertEquals(10, game.getPlayer().getPlayerPos().getIntY());
 

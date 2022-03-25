@@ -5,18 +5,16 @@ import model.Game;
 import javax.swing.*;
 import java.awt.*;
 
-/*
- * Represents the panel in which the scoreboard is displayed.
- */
+//Represents the panel in which the scoreboard is displayed.
 public class ScorePanel extends JPanel {
-    private static final String INVADERS_TXT = "Score: ";
-    private static final String MISSILES_TXT = "Bullets remaining: ";
+    private static final String SCORE_TXT = "Score: ";
+    private static final String BULLETS_TXT = "Bullets remaining: ";
     private static final String RELOADS_TXT = "Reloads available: ";
     private static final int LBL_WIDTH = 200;
     private static final int LBL_HEIGHT = 30;
     private Game game;
-    private JLabel invadersLbl;
-    private JLabel missilesLbl;
+    private JLabel scorelbl;
+    private JLabel bulletsLBL;
     private JLabel reloadsLbl;
 
     // Constructs a score panel
@@ -24,41 +22,44 @@ public class ScorePanel extends JPanel {
     //          updates this with the game whose score is to be displayed
     public ScorePanel(Game g) {
         game = g;
-        setBackground(Color.black);
+        setBackground(Color.white);
 
-        invadersLbl = new JLabel(INVADERS_TXT + game.getScore());
-        invadersLbl.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
+        scorelbl = new JLabel(SCORE_TXT + game.getScore());
+        scorelbl.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
 
-        missilesLbl = new JLabel(MISSILES_TXT + game.getNumBullets());
-        missilesLbl.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
+        bulletsLBL = new JLabel(BULLETS_TXT + game.getNumBullets());
+        bulletsLBL.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
 
         reloadsLbl = new JLabel(RELOADS_TXT + game.getNumPower());
-        missilesLbl.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
+        bulletsLBL.setPreferredSize(new Dimension(LBL_WIDTH, LBL_HEIGHT));
 
-        add(invadersLbl);
+        add(scorelbl);
         add(Box.createHorizontalStrut(10));
-        add(missilesLbl);
+        add(bulletsLBL);
         add(Box.createHorizontalStrut(10));
         add(reloadsLbl);
     }
 
+    public void setGame(Game g) {
+        game = g;
+    }
+
     // Updates the score panel
     // modifies: this
-    // effects:  updates number of invaders shot and number of missiles
-    //           remaining to reflect current state of game
+    // effects:  updates score, bullets, reloads to reflect current state of game
     public void update() {
-        invadersLbl.setText(INVADERS_TXT + game.getScore());
-        invadersLbl.setForeground(Color.WHITE);
+        scorelbl.setText(SCORE_TXT + game.getScore());
+        scorelbl.setForeground(Color.black);
 
-        missilesLbl.setText(MISSILES_TXT + game.getNumBullets());
+        bulletsLBL.setText(BULLETS_TXT + game.getNumBullets());
         if (game.getNumBullets() < 3) {
-            missilesLbl.setForeground(Color.RED);
+            bulletsLBL.setForeground(Color.RED);
         } else {
-            missilesLbl.setForeground(Color.WHITE);
+            bulletsLBL.setForeground(Color.black);
         }
 
         reloadsLbl.setText(RELOADS_TXT + game.getNumPower());
-        reloadsLbl.setForeground(Color.WHITE);
+        reloadsLbl.setForeground(Color.black);
 
         repaint();
     }

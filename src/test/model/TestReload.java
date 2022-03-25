@@ -35,7 +35,7 @@ public class TestReload {
     @Test
     public void testMove() {
         reload.move();
-        assertEquals(yInt + 1, reload.getIntY());
+        assertEquals(26, reload.getIntY());
     }
 
 }

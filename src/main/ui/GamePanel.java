@@ -5,14 +5,13 @@ import model.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.lang.annotation.Target;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-/*
- * The panel in which the game is rendered.
- */
+// The panel in which the game is rendered.
 public class GamePanel extends JPanel {
 
-    private static final String OVER = "Game Over!";
+    private static final String OVER = "Game Over !";
     private static final String SCORE = "Score:";
     private Game game;
 
@@ -21,27 +20,36 @@ public class GamePanel extends JPanel {
     //           updates this with the game to be displayed
     public GamePanel(Game g) {
         setPreferredSize(new Dimension(Game.WIDTH, Game.HEIGHT));
-        setBackground(Color.black);
+        setBackground(Color.white);
         this.game = g;
     }
 
-    @Override
+    // effects: sets game to given game
+    public void setGame(Game g) {
+        game = g;
+    }
+
+    // modifies: g
+    // effects: paints on the components of the game
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
 
         if (game.isEnded()) {
             gameOver(g);
 
         } else {
-            drawGame(g);
+            try {
+                drawGame(g);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     // Draws the game
     // modifies: g
     // effects:  draws the game onto g
-    private void drawGame(Graphics g) {
+    private void drawGame(Graphics g) throws MalformedURLException {
         drawPlayer(g);
         drawTarget(g);
         drawBullets(g);
@@ -50,37 +58,37 @@ public class GamePanel extends JPanel {
 
 
     // effects: Renders the player
-    private void drawPlayer(Graphics g) {
+    private void drawPlayer(Graphics g) throws MalformedURLException {
         Player player = game.getPlayer();
         g.setColor(Color.white);
-        g.fillRect(player.getPlayerPos().getIntX() - player.SIZE_X / 2,
-                player.getPlayerPos().getIntY() - player.SIZE_X / 2, player.SIZE_X, player.SIZE_Y);
-        //g.fillRect(4, 4, 4, 4);
+        Image image = new ImageIcon(new URL("https://i.imgur.com/Ik322mC.png")).getImage();
+        g.drawImage(image, player.getPlayerPos().getIntX() - Player.SIZE_X / 2,
+                      player.getPlayerPos().getIntY() - Player.SIZE_X / 2, Player.SIZE_X, Player.SIZE_Y,
+                null);
         g.setColor(Color.white);
 
     }
 
 
-    // Draw the invaders
+    // Draw the targets
     // modifies: g
-    // effects:  draws the invaders onto g
-    private void drawTarget(Graphics g) {
+    // effects:  draws the targets onto g
+    private void drawTarget(Graphics g) throws MalformedURLException {
         for (Position target : game.getTarget()) {
             drawPosition(g, target);
         }
     }
 
-    // Draw an invader
+    // Draw a target
     // modifies: g
-    // effects:  draws the invader i onto g
-    private void drawPosition(Graphics g, Position i) {
-        Color savedCol = g.getColor();
-        g.setColor(Color.red);
-        g.fillOval(i.getIntX() - 15 / 2, i.getIntY() - 9 / 2, 15, 9);
+    // effects:  draws the target i onto g
+    private void drawPosition(Graphics g, Position i) throws MalformedURLException {
+        Image image = new ImageIcon(new URL("https://i.imgur.com/gxnILDM.png")).getImage();
+        g.drawImage(image, i.getIntX() - 40 / 2, i.getIntY() - 40 / 2, 40, 40, null);
         g.setColor(Color.red);
     }
 
-    // Draws the missiles
+    // Draws the bullets
     // modifies: g
     // effects:  draws the bullets onto g
     private void drawBullets(Graphics g) {
@@ -89,14 +97,13 @@ public class GamePanel extends JPanel {
         }
     }
 
-    // Draws a missile
+    // Draws a bullet
     // modifies: g
-    // effects:  draws the missile m onto g
+    // effects:  draws the bullet m onto g
     private void drawBullet(Graphics g, Bullet m) {
-        Color savedCol = g.getColor();
-        g.setColor(Color.yellow);
-        g.fillOval(m.getBulletX() - m.SIZE_X / 2, m.getBulletY() - m.SIZE_Y / 2, m.SIZE_X, m.SIZE_Y);
-        g.setColor(Color.yellow);
+        g.fillOval(m.getBulletX() - Bullet.SIZE_X / 2, m.getBulletY() - Bullet.SIZE_Y / 2,
+                Bullet.SIZE_X, Bullet.SIZE_Y);
+        g.setColor(Color.red);
     }
 
 
@@ -107,14 +114,13 @@ public class GamePanel extends JPanel {
         }
     }
 
-    // Draws a missile
+    // Draws the reloads
     // modifies: g
-    // effects:  draws the missile m onto g
-    private void drawPower(Graphics g, Reload m) {
-        Color savedCol = g.getColor();
-        g.setColor(Color.yellow);
-        g.fillOval(m.getIntX() - m.SIZE_X / 2, m.getIntY() - m.SIZE_Y / 2, m.SIZE_X, m.SIZE_Y);
-        g.setColor(Color.yellow);
+    // effects:  draws the reloads onto g
+    private void drawPower(Graphics g, Reload reload) {
+        g.drawOval(reload.getIntX() - Reload.SIZE_X / 2, reload.getIntY() - Reload.SIZE_Y / 2,
+                Reload.SIZE_X, Reload.SIZE_Y);
+        g.setColor(Color.red);
     }
 
     // Draws the "game over" message and replay instructions
@@ -122,8 +128,8 @@ public class GamePanel extends JPanel {
     // effects:  draws "game over" and replay instructions onto g
     private void gameOver(Graphics g) {
         Color saved = g.getColor();
-        g.setColor(Color.WHITE);
-        g.setFont(new Font("Arial", 20, 20));
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.BOLD, 30));
         FontMetrics fm = g.getFontMetrics();
         centreString(OVER, g, fm, Game.HEIGHT / 2);
         centreString(SCORE + game.getScore(), g, fm, Game.HEIGHT / 2 + 50);
@@ -133,8 +139,8 @@ public class GamePanel extends JPanel {
     // Centres a string on the screen
     // modifies: g
     // effects:  centres the string str horizontally onto g at vertical position yPos
-    private void centreString(String str, Graphics g, FontMetrics fm, int yPos) {
+    private void centreString(String str, Graphics g, FontMetrics fm, int posY) {
         int width = fm.stringWidth(str);
-        g.drawString(str, (Game.WIDTH - width) / 2, yPos);
+        g.drawString(str, (Game.WIDTH - width) / 2, posY);
     }
 }

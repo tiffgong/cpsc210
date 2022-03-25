@@ -13,7 +13,7 @@ public class Game implements Writable {
     public static final int TICKS_PER_SECOND = 10;
     private Player player = new Player();
     private Set<Position> target = new HashSet<>();
-    private List<Bullet> bullets;
+    private ArrayList<Bullet> bullets;
     private List<Reload> reloads;
     public static final Random RND = new Random();
 
@@ -40,28 +40,27 @@ public class Game implements Writable {
     // effects: progresses the game state, moving bullets and reload
     //          , and handling targets and reloads
     public void tick() {
-
-        if (isOutOfBounds(player.getPlayerPos())) {
-            ended = true;
-            return;
-        }
-        bulletsHit();
-        powersHit();
-        moveBullets();
-        moveReload();
-        hitTarget();
-
-        if (target.size() < 10) {
-            spawnNewTarget();
-        }
-
-        if (reloads.size() < 2) {
-            spawnReload();
-        }
-
         if (isEnded()) {
             bullets.clear();
             target.clear();
+        } else {
+            if (isOutOfBounds(player.getPlayerPos())) {
+                ended = true;
+                return;
+            }
+            bulletsHit();
+            powersHit();
+            moveBullets();
+            moveReload();
+            hitTarget();
+
+            if (target.size() < 10) {
+                spawnNewTarget();
+            }
+
+            if (reloads.size() < 2) {
+                spawnReload();
+            }
         }
     }
 
@@ -178,19 +177,19 @@ public class Game implements Writable {
     //          out of bounds also marks it as invalid,
     private void bulletHit(Bullet bullet) {
 
-        Position eatenFood = target.stream()
+        Position hit = target.stream()
                 .filter(bullet::hasCollided)
                 .findFirst()
                 .orElse(null);
 
-        if (eatenFood == null) {
+        target.remove(hit);
+        if (hit == null) {
             if (isOutOfBounds(bullet.getPos())) {
                 bulletsToRemove.add(bullet);
             }
             return;
         }
 
-        target.remove(eatenFood);
         score++;
         bulletsToRemove.add(bullet);
     }
@@ -319,7 +318,7 @@ public class Game implements Writable {
     // effects: set targets
     public void setTarget(int posX, int posY) {
         target.remove(0);
-        target.add(new Position(posX,posY));
+        target.add(new Position(posX, posY));
     }
 
     // effects: set player X coord

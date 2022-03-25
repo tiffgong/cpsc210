@@ -43,16 +43,16 @@ public class TestBullet {
     public void testMove() {
         assertEquals(xInt, bull.getBulletX());
         bull.move();
-        assertEquals(12, bull.getBulletX());
+        assertEquals(14, bull.getBulletX());
         bull = new Bullet(pos, Direction.LEFT);
         bull.move();
-        assertEquals(8, bull.getBulletX());
+        assertEquals(6, bull.getBulletX());
         bull = new Bullet(pos, Direction.UP);
         bull.move();
-        assertEquals(18, bull.getBulletY());
+        assertEquals(16, bull.getBulletY());
         bull = new Bullet(pos, Direction.DOWN);
         bull.move();
-        assertEquals(22, bull.getBulletY());
+        assertEquals(24, bull.getBulletY());
 
     }
 

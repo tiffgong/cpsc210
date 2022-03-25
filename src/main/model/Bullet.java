@@ -8,8 +8,8 @@ import java.awt.*;
 // represents a bullet
 public class Bullet {
 
-    public static final int SIZE_X = 5;
-    public static final int SIZE_Y = 9;
+    public static final int SIZE_X = 20;
+    public static final int SIZE_Y = 20;
     public static final int DY = -4;
     public static final int DX = 4;
     private Position bulletPos;

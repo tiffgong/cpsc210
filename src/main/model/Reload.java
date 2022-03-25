@@ -3,10 +3,10 @@ package model;
 // represents an item used for "reloads"
 public class Reload {
 
-    public static final int DY = 10;
-    private static final int JIGGLE_X = 10;
+    public static final int DY = 6;
+    private static final int JIGGLE_X = 5;
     public static final int SIZE_X = 10;
-    public static final int SIZE_Y = 9;
+    public static final int SIZE_Y = 10;
     private Position powerPos;
     private int intX;
     private int intY;

@@ -6,11 +6,11 @@ import java.awt.*;
 public class Player {
     private Direction playerDir;
     private Position body;
-    public static final int SIZE_X = 15;
-    public static final int SIZE_Y = 15;
+    public static final int SIZE_X = 45;
+    public static final int SIZE_Y = 45;
 
     public Player() {
-        this.body = new Position(1, 1);
+        this.body = new Position(400, 300);
         this.playerDir = Direction.RIGHT;
     }
 
@@ -56,10 +56,11 @@ public class Player {
     // effects: returns true if bullet is at a given position, false otherwise
     public boolean hasCollided(Position pos) {
         //return body.equals(pos);
+        int size = 40;
         Rectangle invaderBoundingRect = new Rectangle(getPlayerPos().getIntX() - SIZE_X / 2,
                 getPlayerPos().getIntY() - SIZE_Y / 2, SIZE_X, SIZE_Y);
-        Rectangle missileBoundingRect = new Rectangle(pos.getIntX() - Bullet.SIZE_X / 2,
-                pos.getIntY() - Bullet.SIZE_Y / 2, Bullet.SIZE_X, Bullet.SIZE_Y);
+        Rectangle missileBoundingRect = new Rectangle(pos.getIntX() - size / 2,
+                pos.getIntY() - size / 2, size, size);
         return invaderBoundingRect.intersects(missileBoundingRect);
     }
 }
