@@ -1,7 +1,6 @@
 package model;
 
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
@@ -189,7 +188,6 @@ public class Game implements Writable {
             }
             return;
         }
-        EventLog.getInstance().logEvent(new Event("bullet hit."));
         score++;
         bulletsToRemove.add(bullet);
     }
@@ -229,6 +227,7 @@ public class Game implements Writable {
         if (numReloads > 0) {
             numReloads = numReloads - 1;
             currBullets = currBullets + 5;
+            EventLog.getInstance().logEvent(new Event("Used reload."));
         }
     }
 
@@ -343,6 +342,8 @@ public class Game implements Writable {
         json.put("player y", player.getPlayerPos().getIntY());
         json.put("max x", getMaxX());
         json.put("max y", getMaxY());
+        json.put("ended?", isEnded());
+
 
         return json;
     }

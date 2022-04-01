@@ -125,7 +125,7 @@ public class GamePanel extends JPanel {
 
     // Draws the "game over" message and replay instructions
     // modifies: g
-    // effects:  draws "game over" and replay instructions onto g
+    // effects:  draws "game over" and score
     private void gameOver(Graphics g) {
         Color saved = g.getColor();
         g.setColor(Color.BLACK);

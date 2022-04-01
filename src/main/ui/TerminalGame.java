@@ -19,7 +19,7 @@ import persistence.JsonWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-// the terminal game
+// the terminal game ***** no longer used
 public class TerminalGame {
     private Game game;
     private Screen screen;
@@ -73,7 +73,6 @@ public class TerminalGame {
         handleUserInput();
 
         game.tick();
-
         screen.setCursorPosition(new TerminalPosition(0, 0));
         screen.clear();
         render();

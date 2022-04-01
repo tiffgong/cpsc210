@@ -2,6 +2,7 @@ package ui;
 
 
 import model.Direction;
+import model.Event;
 import model.EventLog;
 import model.Game;
 import persistence.JsonReader;
@@ -142,6 +143,10 @@ public class Gui extends JFrame implements ActionListener {
             loadGame();
             JOptionPane.showMessageDialog(this, "Loaded");
         } else if (choice.equals("Quit")) {
+            for (Event i : EventLog.getInstance()) {
+                System.out.println(i.getDescription());
+            }
+            EventLog.getInstance().clear();
             System.exit(0);
         } else if (choice.equals("Restart")) {
             game = new Game(Game.WIDTH, Game.HEIGHT);
@@ -220,7 +225,7 @@ public class Gui extends JFrame implements ActionListener {
             jsonWriter.open();
             jsonWriter.write(game);
             jsonWriter.close();
-            System.out.println("Saved from " + JSON_STORE);
+            //System.out.println("Saved from " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
         }
@@ -232,7 +237,7 @@ public class Gui extends JFrame implements ActionListener {
         try {
             game = jsonReader.read();
             reset(game);
-            System.out.println("Loaded from " + JSON_STORE);
+            //System.out.println("Loaded from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
