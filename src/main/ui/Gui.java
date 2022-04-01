@@ -2,6 +2,7 @@ package ui;
 
 
 import model.Direction;
+import model.EventLog;
 import model.Game;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -127,7 +128,6 @@ public class Gui extends JFrame implements ActionListener {
                 sp.update();
             }
         });
-
         t.start();
     }
 
@@ -174,6 +174,7 @@ public class Gui extends JFrame implements ActionListener {
         public void keyPressed(KeyEvent e) {
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 game.shoot();
+                EventLog.getInstance();
             } else if (e.getKeyCode() == KeyEvent.VK_R) {
                 game.useReload();
             }
@@ -236,4 +237,5 @@ public class Gui extends JFrame implements ActionListener {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
+
 }

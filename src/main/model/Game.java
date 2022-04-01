@@ -189,7 +189,7 @@ public class Game implements Writable {
             }
             return;
         }
-
+        EventLog.getInstance().logEvent(new Event("bullet hit."));
         score++;
         bulletsToRemove.add(bullet);
     }
@@ -215,6 +215,7 @@ public class Game implements Writable {
             powersToRemove.add(power);
             score = score + 5;
             numReloads++;
+            EventLog.getInstance().logEvent(new Event("Got reload."));
         }
         if (isOutOfBounds(power.getPos())) {
             powersToRemove.add(power);
